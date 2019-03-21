@@ -5,6 +5,10 @@ public class Contato {
 	private String email;
 	
 	private String telefone;
+	
+	public Contato() {
+		
+	}
         
  	public Contato(String nome, String email, String telefone) {
 		
