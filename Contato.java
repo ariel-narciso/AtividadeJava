@@ -36,4 +36,4 @@ public class Contato {
 	public String getTelefone() {
 		return this.telefone;
 	}
-
+}

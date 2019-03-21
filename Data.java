@@ -1,4 +1,6 @@
 class Data {
+
+	private boolean foiInicializado;
 	
 	private int dia;
 	
@@ -14,20 +16,15 @@ class Data {
 	
 	private int numDiasMeses[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	
-	public Data() {
-		
-		this.dia = 1;
-		this.mes = 1;
-		this.ano = 1950;
-	}
-	
 	public Data(int dia, int mes, int ano) {
 		
 		this.dia = dia;
 		this.mes = mes;
 		this.ano = ano;
 		
-		if (!validarData()) {
+		foiInicializado = validarData();
+		
+		if (!foiInicializado) {
 		
 			this.dia = 1;
 			this.mes = 1;
@@ -35,17 +32,9 @@ class Data {
 		}
 	}
 	
-	/*public static void main(String[] args) {
-		
-		Data data = new Data(13, 12, 2015);
-		System.out.println(data.getData());
-		data.setMes(2);
-		System.out.println(data.getData());
-		data.setAno(1200);
-		System.out.println(data.getData());
-		data.setDia(29);
-		System.out.println(data.getData());
-	}*/
+	public boolean getFoiInicializado() {
+		return this.foiInicializado;
+	}
 	
 	public int getDia() {
 		return this.dia;
@@ -136,28 +125,16 @@ class Data {
 			return false;
 		}
 		
-		if (éAnoBissexto()) {
-			this.numDiasMeses[1] = 29;
-		} else {
-			this.numDiasMeses[1] = 28;
-		}
+		numDiasMeses[1] = éAnoBissexto() ? 29 : 28;
 		
-		if (this.mes >= 1 && this.mes <= 12) {
-			if (this.dia >= 1 && this.dia <= this.numDiasMeses[this.mes - 1]) {
-				return true;
-			}
-		}
-		
-		return false;
+		return (
+			this.mes >= 1 && this.mes <= 12 && this.dia >= 1 &&
+			this.dia <= this.numDiasMeses[this.mes - 1]
+		);
 	}
 	
 	private boolean éAnoBissexto() {
-	
-		if (this.ano % 400 == 0 || (this.ano % 100 != 0 && this.ano % 4 == 0)) {
-			return true;
-		}
-		
-		return false;
+		return (this.ano % 400 == 0) || (this.ano % 100 != 0 && this.ano % 4 == 0);
 	}
 }
 
